@@ -110,6 +110,36 @@ const mainController = {
 
         return res.json(customer.statement)
     },
+
+    updateAccount: (req, res) => {
+        const { customer } = req
+        const { name } = req.body
+
+        customer.name = name
+
+        return res.status(201).send("Name changed")
+    },
+
+    deleteAccount: (req, res) => {
+        const { customer } = req
+
+        customers.splice(customer, 1)
+
+        return res.status(200).json(customers)
+    },
+
+    getBalanceAccount: (req, res) => {
+
+        const { customer } = req
+
+        const balance = getBalanceAccount(customer.statement)
+
+        console.log(balance)
+
+        return res.status(200).send(balance)
+
+
+    }
 }
 
 module.exports = mainController;
